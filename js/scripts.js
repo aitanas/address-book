@@ -7,7 +7,7 @@ function AddressBook () {
 
 AddressBook.prototype.addContact = function(contact) {
   contact.id = this.assignId();
-  this.contacts[contact.firstName] = contact;
+  this.contacts[contact.id] = contact;
 };
 
 AddressBook.prototype.assignId = function() {
@@ -20,6 +20,18 @@ AddressBook.prototype.findContact = function(id) {
     return this.contacts[id];
   }
   return false;
+};
+
+AddressBook.prototype.deleteContact = function(id) {
+  if (this.contacts[id] === undefined) {
+    return false;
+  }
+  delete this.contacts[id];
+  return true;
+};
+
+AddressBook.prototype.update = function(id, key, value) {
+  this.contacts[id][key] = value;
 };
 
 // Business Logic for Contacts ---------
